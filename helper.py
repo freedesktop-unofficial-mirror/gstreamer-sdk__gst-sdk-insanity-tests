@@ -3,6 +3,7 @@
 import sys
 import subprocess
 import re
+import string
 
 def insanity(test,args):
     if len(sys.argv) > 1:
@@ -29,7 +30,14 @@ def summarize():
     except Exception,e:
         print 'Exception running %r: %s' % (cmd, e)
         raise
-    errors = int(re.sub(r'.*Failed:[^0-9]*([0-9]+).*', '\\1', line))
+    if not line:
+        raise Exception("No output")
+    lines = string.split(line,"\n")
+    # insanity-dumpresults prints an empty line after the last results line
+    if not lines or len(lines) <= 1:
+        raise Exception("Output has less than two lines")
+    last_line = lines[len(lines)-2]
+    errors = int(re.sub(r'.*Failed:[^0-9]*([0-9]+).*', '\\1', last_line))
     if errors != 0:
         raise Exception("One or more tests failed")
 
