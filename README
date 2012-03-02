@@ -1,2 +1,4 @@
 This holds the Insanity tests to be done for the GStreamer SDK.
 
+The buildbot will run alltests.py.
+
