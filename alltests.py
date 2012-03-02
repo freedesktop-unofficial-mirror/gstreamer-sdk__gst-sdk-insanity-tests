@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
+import os
 import helper
 
-MEDIA_ROOT="~/mnt/keema"
+MEDIA_ROOT=os.path.expanduser("~/mnt/keema")
 
 helper.insanity(
     test = "blank-c-gst-test",
