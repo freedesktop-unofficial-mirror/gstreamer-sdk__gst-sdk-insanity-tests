@@ -1,9 +1,23 @@
 #!/usr/bin/env python
 
+import os
 import sys
 import subprocess
 import re
 import string
+
+mount_point=None
+
+def set_media_root(location):
+    global mount_point
+    mount_point=None
+    path=os.path.expanduser("~/mnt/insanity_tests_media_root")
+    if not os.path.exists(path):
+        os.mkdir(path)
+    print "Mounting media root"
+    subprocess.check_call(["sshfs", location, path])
+    mount_point=path
+    return mount_point
 
 def insanity(test,args):
     if len(sys.argv) > 1:
@@ -42,6 +56,11 @@ def summarize():
         raise Exception("One or more tests failed")
 
 def done():
+    global mount_point
+    if mount_point:
+        print "Unmounting media root"
+        subprocess.check_call(["fusermount", "-u", mount_point])
+        mount_point = None
     try:
         summarize()
         sys.exit(0)

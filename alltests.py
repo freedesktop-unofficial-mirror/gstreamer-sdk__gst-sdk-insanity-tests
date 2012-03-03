@@ -3,7 +3,7 @@
 import os
 import helper
 
-MEDIA_ROOT=os.path.expanduser("~/mnt/keema")
+MEDIA_ROOT = helper.set_media_root("keema.collabora.co.uk:/")
 
 helper.insanity(
     test = "blank-c-gst-test",
