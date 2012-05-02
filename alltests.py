@@ -3,12 +3,12 @@
 import os
 import helper
 
-#MEDIA_ROOT = helper.set_media_root("keema.collabora.co.uk:/")
+MEDIA_ROOT = helper.set_media_root("keema.collabora.co.uk:/")
 
 helper.insanity(
     test = "insanity-test-gst-play",
     args = [
-      'uri:filesystem:$MEDIA_ROOT/srv/shared/media-samples/sorted/WebM'
+      'uri:filesystem:'+MEDIA_ROOT+'/srv/shared/media-samples/sorted/WebM'
     ],
 )
 

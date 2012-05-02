@@ -15,7 +15,7 @@ def set_media_root(location):
     if not os.path.exists(path):
         os.makedirs(path)
     print "Mounting media root"
-    subprocess.check_call(["sshfs", location, path])
+    subprocess.check_call(["sshfs", location, path, "-o", "nonempty"])
     mount_point=path
     return mount_point
 
