@@ -6,9 +6,9 @@ import helper
 MEDIA_ROOT = helper.set_media_root("keema.collabora.co.uk:/")
 
 helper.insanity(
-    test = "insanity-test-gst-play",
+    test = "insanity-test-play",
     args = [
-      'uri:filesystem:'+MEDIA_ROOT+'/srv/shared/media-samples/sorted/WebM'
+      'uri:urifilesystem:'+MEDIA_ROOT+'/srv/shared/media-samples/sorted/WebM'
     ],
 )
 
