@@ -8,7 +8,7 @@ import helper
 helper.insanity(
     test = "insanity-test-gst-play",
     args = [
-      'uri:filesystem:'+MEDIA_ROOT+'/srv/shared/media-samples/sorted/WebM'
+      'uri:filesystem:$MEDIA_ROOT/srv/shared/media-samples/sorted/WebM'
     ],
 )
 
