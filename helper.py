@@ -19,9 +19,12 @@ def set_media_root(location):
     mount_point=path
     return mount_point
 
+def expandvars(argument):
+    return os.path.expandvars(argument)
+
 def insanity(test,args):
     if len(sys.argv) > 1:
-        testsdir = sys.argv[1]
+        testsdir = expandvars(sys.argv[1])
     else:
         testsdir = 'tests'
 
@@ -67,4 +70,3 @@ def done():
     except Exception,e:
         print 'Error:', e
         sys.exit(1)
-
