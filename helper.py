@@ -32,7 +32,7 @@ def insanity(test,args):
     if args:
         cmd.append ('--args')
         cmd.extend (args)
-    #print 'Running command: %r' % cmd
+    print 'Running command: %r' % cmd
     try:
         process = subprocess.check_call(cmd)
     except Exception,e:
