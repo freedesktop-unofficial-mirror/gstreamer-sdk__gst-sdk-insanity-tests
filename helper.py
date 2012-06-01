@@ -13,7 +13,7 @@ def set_media_root(location):
     mount_point=None
     path=os.path.expanduser("~/mnt/insanity_tests_media_root")
     if not os.path.exists(path):
-        os.mkdir(path)
+        os.makedirs(path)
     print "Mounting media root"
     subprocess.check_call(["sshfs", location, path])
     mount_point=path
