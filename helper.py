@@ -8,6 +8,20 @@ import string
 
 mount_point=None
 
+def unmount_media_root(location, silent=False):
+    if not silent:
+        print "Unmounting media root"
+    try:
+        if os.uname()[0] == 'Linux':
+            subprocess.check_call(["fusermount", "-u", "-z", location])
+        elif os.uname()[0] == 'Darwring':
+            subprocess.check_call(["umount", location])
+        else:
+            raise Exception('%s not supported' % os.uname()[0]);
+    except Exception,e:
+        if not silent:
+            print 'Failed to unmount media root: %s' % e
+
 def set_media_root(location):
     global mount_point
     mount_point=None
@@ -15,7 +29,8 @@ def set_media_root(location):
     if not os.path.exists(path):
         os.makedirs(path)
     print "Mounting media root"
-    subprocess.check_call(["sshfs", location, path, "-o", "nonempty"])
+    unmount_media_root(path, True);
+    subprocess.check_call(["sshfs", location, path])
     mount_point=path
     return mount_point
 
@@ -37,7 +52,6 @@ def insanity(test,args):
         process = subprocess.check_call(cmd)
     except Exception,e:
         print 'Exception running %r: %s' % (cmd, e)
-        subprocess.check_call(["fusermount", "-u", mount_point])
         raise
 
 def summarize():
@@ -62,8 +76,7 @@ def summarize():
 def done():
     global mount_point
     if mount_point:
-        print "Unmounting media root"
-        subprocess.check_call(["fusermount", "-u", mount_point])
+        unmount_media_root(mount_point);
         mount_point = None
     try:
         summarize()
