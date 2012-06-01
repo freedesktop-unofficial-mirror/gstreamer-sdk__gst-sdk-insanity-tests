@@ -14,7 +14,7 @@ def unmount_media_root(location, silent=False):
     try:
         if os.uname()[0] == 'Linux':
             subprocess.check_call(["fusermount", "-u", "-z", location])
-        elif os.uname()[0] == 'Darwring':
+        elif os.uname()[0] == 'Darwin':
             subprocess.check_call(["umount", location])
         else:
             raise Exception('%s not supported' % os.uname()[0]);
